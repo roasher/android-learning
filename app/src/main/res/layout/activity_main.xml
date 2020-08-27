@@ -6,22 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/main_header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="251dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/main_header"
+        android:textAlignment="center"
+        android:textColor="@color/main_color_highlight"
+        android:textSize="34sp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/clickerButton"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@mipmap/img_logo"
+        app:layout_constraintBottom_toTopOf="@id/main_header"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/main_promo"
+        android:layout_width="308dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha="0.73"
+        android:text="@string/main_promo"
+        android:textAlignment="center"
+        android:textColor="@color/main_promo"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_header" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="279dp"
+        android:layout_height="48dp"
+        android:hint="@string/main_input"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_promo" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:shadowDy="4"
+        android:id="@+id/nextButton"
+        android:layout_width="223dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="515dp"
+        android:layout_marginBottom="@dimen/end_screen_margin"
+        android:background="@drawable/buttod_default_background"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/main_button"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
