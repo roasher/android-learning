@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/secondary_fragment_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/main_promo"
+        android:textAlignment="center"
+        android:textSize="42dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
