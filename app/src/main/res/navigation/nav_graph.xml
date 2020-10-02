@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/secondaryFragment"
-        android:name="ru.pyurkin.pddtest.screens.launcher.SecondaryFragment"
+        android:name="ru.pyurkin.pddtest.screens.tests.SecondaryFragment"
         android:label="SecondaryFragment" />
 </navigation>

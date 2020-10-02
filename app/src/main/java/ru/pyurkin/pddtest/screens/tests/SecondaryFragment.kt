@@ -1,9 +1,8 @@
-package ru.pyurkin.pddtest.screens.launcher
+package ru.pyurkin.pddtest.screens.tests
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.secondary_fragment.*
 import ru.pyurkin.pddtest.R
 
 class SecondaryFragment : Fragment(R.layout.secondary_fragment) {

@@ -7,14 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.main_fragment.*
 import ru.pyurkin.pddtest.R
+import ru.pyurkin.pddtest.screens.tests.SecondaryFragment
 
 class MainFragment : Fragment(R.layout.main_fragment) {
-
-    companion object {
-        fun newInstance(): MainFragment {
-            return MainFragment()
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.i("main_fragment", "onViewCreated")
