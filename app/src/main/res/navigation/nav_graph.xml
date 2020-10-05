@@ -9,10 +9,10 @@
         android:label="MainFragment" >
         <action
             android:id="@+id/action_mainFragment_to_secondaryFragment"
-            app:destination="@id/secondaryFragment" />
+            app:destination="@id/test_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/secondaryFragment"
-        android:name="ru.pyurkin.pddtest.screens.tests.SecondaryFragment"
+        android:id="@+id/test_fragment"
+        android:name="ru.pyurkin.pddtest.screens.tests.TestsFragment"
         android:label="SecondaryFragment" />
 </navigation>

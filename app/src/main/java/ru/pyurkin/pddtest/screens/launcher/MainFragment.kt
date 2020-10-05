@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.main_fragment.*
 import ru.pyurkin.pddtest.R
-import ru.pyurkin.pddtest.screens.tests.SecondaryFragment
+import ru.pyurkin.pddtest.screens.tests.TestsFragment
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
@@ -16,8 +16,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         nextButton.setOnClickListener {
-            it.findNavController().navigate(R.id.secondaryFragment, Bundle().apply {
-                this.putString(SecondaryFragment.AUTH_TOKEN, "Hello from the Main Fragment");
+            it.findNavController().navigate(R.id.test_fragment, Bundle().apply {
+                this.putString(TestsFragment.AUTH_TOKEN, "Hello from the Main Fragment");
             })
         }
     }
