@@ -25,7 +25,7 @@ class TestsAdapter : RecyclerView.Adapter<TestsAdapter.TestViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return TestViewHolder(inflater.inflate(R.layout.test_cell, parent, false))
+        return TestViewHolder(inflater.inflate(R.layout.item_test, parent, false))
     }
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {

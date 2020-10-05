@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.test_cell.*
-import kotlinx.android.synthetic.main.tests_fragment.*
+import kotlinx.android.synthetic.main.fragment_test.*
 import ru.pyurkin.pddtest.R
-import java.util.stream.IntStream
-import java.util.stream.StreamSupport
 
-class TestsFragment : Fragment(R.layout.tests_fragment) {
+class TestsFragment : Fragment(R.layout.fragment_test) {
 
     companion object {
         val AUTH_TOKEN = "authToken"

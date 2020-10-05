@@ -5,14 +5,14 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import ru.pyurkin.pddtest.R
 import ru.pyurkin.pddtest.screens.tests.TestsFragment
 
-class MainFragment : Fragment(R.layout.main_fragment) {
+class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.i("main_fragment", "onViewCreated")
+        Log.i("fragment_main", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
 
         nextButton.setOnClickListener {
