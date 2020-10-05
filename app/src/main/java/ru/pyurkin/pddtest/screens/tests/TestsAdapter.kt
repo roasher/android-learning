@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -40,9 +39,8 @@ class TestsAdapter : RecyclerView.Adapter<TestsAdapter.TestViewHolder>() {
         val checkBox = itemView.findViewById<AppCompatCheckBox>(R.id.test_check_box)
         checkBox.isChecked = isChecked
 
-        checkBox.setOnCheckedChangeListener { _, buttonIsChecked ->
-            Log.i("onBindViewHolder", "position:${position},isChecked:${buttonIsChecked}")
-            models[position].isChecked = buttonIsChecked
+        checkBox.setOnClickListener {
+            models[position].isChecked = checkBox.isChecked
         }
     }
 
