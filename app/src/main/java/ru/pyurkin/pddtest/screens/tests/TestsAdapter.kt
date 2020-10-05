@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -36,10 +37,16 @@ class TestsAdapter : RecyclerView.Adapter<TestsAdapter.TestViewHolder>() {
             itemView.findViewById<AppCompatImageView>(R.id.test_icon).setImageResource(icon)
         }
         itemView.findViewById<AppCompatTextView>(R.id.test_text).text = name
-        itemView.findViewById<AppCompatCheckBox>(R.id.test_check_box).isChecked = isChecked
+        val checkBox = itemView.findViewById<AppCompatCheckBox>(R.id.test_check_box)
+        checkBox.isChecked = isChecked
+
+        checkBox.setOnCheckedChangeListener { _, buttonIsChecked ->
+            Log.i("onBindViewHolder", "position:${position},isChecked:${buttonIsChecked}")
+            models[position].isChecked = buttonIsChecked
+        }
     }
 
     override fun getItemCount(): Int = this.models.size
 }
 
-data class TestModel(val name: String, val isChecked: Boolean, val icon: Int)
+data class TestModel(val name: String, var isChecked: Boolean, val icon: Int)
