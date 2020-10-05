@@ -22,10 +22,12 @@ class TestsFragment : Fragment(R.layout.fragment_test) {
         test_list.adapter = testsAdapter;
         test_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val model = ArrayList<TestModel>()
+        val model = ArrayList<TestsAdapter.Model>()
         for (i in 0..20) {
-            model.add(TestModel("simple name${i}", false, R.mipmap.ic_launcher))
+            model.add(TestsAdapter.TestModel("simple name${i}", false, R.mipmap.ic_launcher))
         }
+        model.set(4, TestsAdapter.BannerModel(R.mipmap.ic_launcher))
+        model.set(7, TestsAdapter.BannerModel(R.mipmap.img_logo))
         testsAdapter.setModel(model)
     }
 }
