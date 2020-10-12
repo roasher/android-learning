@@ -2,6 +2,7 @@ package ru.pyurkin.pddtest.screens.tests
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_test.*
@@ -13,7 +14,11 @@ class TestsFragment : Fragment(R.layout.fragment_test) {
         val AUTH_TOKEN = "authToken"
     }
 
-    private val testsAdapter: TestsAdapter = TestsAdapter()
+    private val testsAdapter: TestsAdapter = TestsAdapter(object : OnCheckBoxClick {
+        override fun doOnClick(model: TestsAdapter.TestModel, checkBox: AppCompatCheckBox) {
+            model.isChecked = checkBox.isChecked
+        }
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

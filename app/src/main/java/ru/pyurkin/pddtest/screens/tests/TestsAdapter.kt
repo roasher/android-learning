@@ -12,7 +12,11 @@ import ru.pyurkin.pddtest.R
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TestsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+interface OnCheckBoxClick {
+    fun doOnClick(model: TestsAdapter.TestModel, checkBox: AppCompatCheckBox)
+}
+
+class TestsAdapter(val onCheckBoxClick: OnCheckBoxClick?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     abstract class Model()
     data class TestModel(val name: String, var isChecked: Boolean, val icon: Int) : Model()
@@ -28,7 +32,7 @@ class TestsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(model: T)
     }
 
-    class TestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), Bindable<TestModel> {
+    class TestViewHolder(itemView: View, val onCheckBoxClick: OnCheckBoxClick?) : RecyclerView.ViewHolder(itemView), Bindable<TestModel> {
         override fun bind(model: TestModel) {
             if (model.icon > 0) {
                 itemView.findViewById<AppCompatImageView>(R.id.test_icon).setImageResource(model.icon)
@@ -38,7 +42,7 @@ class TestsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             checkBox.isChecked = model.isChecked
 
             checkBox.setOnClickListener {
-                model.isChecked = checkBox.isChecked
+                onCheckBoxClick?.doOnClick(model, checkBox)
             }
         }
     }
@@ -62,7 +66,7 @@ class TestsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         Log.i("TestsAdapter", "onCreateViewHolder viewType:${viewType}")
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            0 -> TestViewHolder(inflater.inflate(R.layout.item_test, parent, false))
+            0 -> TestViewHolder(inflater.inflate(R.layout.item_test, parent, false), onCheckBoxClick)
             1 -> BannerViewHolder(inflater.inflate(R.layout.item_banner, parent, false))
             else -> throw IllegalArgumentException("Unknown View Holder")
         }
