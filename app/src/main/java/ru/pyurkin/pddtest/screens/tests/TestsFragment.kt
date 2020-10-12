@@ -2,6 +2,7 @@ package ru.pyurkin.pddtest.screens.tests
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,7 @@ class TestsFragment : Fragment(R.layout.fragment_test) {
     }
 
     private val testsAdapter: TestsAdapter = TestsAdapter(object : OnCheckBoxClick {
-        override fun doOnClick(model: TestsAdapter.TestModel, checkBox: AppCompatCheckBox) {
+        override fun doOnCheckBoxClick(model: TestsAdapter.TestModel, checkBox: AppCompatCheckBox) {
             model.isChecked = checkBox.isChecked
         }
     })

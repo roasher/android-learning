@@ -9,18 +9,28 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.pyurkin.pddtest.R
-import java.util.*
 import kotlin.collections.ArrayList
 
 interface OnCheckBoxClick {
-    fun doOnClick(model: TestsAdapter.TestModel, checkBox: AppCompatCheckBox)
+    fun doOnCheckBoxClick(model: TestsAdapter.TestModel, checkBox: AppCompatCheckBox)
 }
 
-class TestsAdapter(val onCheckBoxClick: OnCheckBoxClick?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TestsAdapter(private val onCheckBoxClick: OnCheckBoxClick?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    abstract class Model()
-    data class TestModel(val name: String, var isChecked: Boolean, val icon: Int) : Model()
-    data class BannerModel(val icon: Int) : Model()
+    abstract class Model {
+        abstract fun getItemViewType(): Int
+    }
+    data class TestModel(val name: String, var isChecked: Boolean, val icon: Int) : Model() {
+        override fun getItemViewType(): Int {
+            return 0
+        }
+    }
+
+    data class BannerModel(val icon: Int) : Model() {
+        override fun getItemViewType(): Int {
+            return 1
+        }
+    }
 
     @Suppress("UNCHECKED_CAST")
     interface Bindable<T:Model> {
@@ -42,7 +52,7 @@ class TestsAdapter(val onCheckBoxClick: OnCheckBoxClick?) : RecyclerView.Adapter
             checkBox.isChecked = model.isChecked
 
             checkBox.setOnClickListener {
-                onCheckBoxClick?.doOnClick(model, checkBox)
+                onCheckBoxClick?.doOnCheckBoxClick(model, checkBox)
             }
         }
     }
@@ -82,6 +92,6 @@ class TestsAdapter(val onCheckBoxClick: OnCheckBoxClick?) : RecyclerView.Adapter
     override fun getItemCount(): Int = this.model.size
 
     override fun getItemViewType(position: Int): Int {
-        return if (model[position] is TestModel) 0 else 1
+        return model[position].getItemViewType()
     }
 }
