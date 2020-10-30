@@ -5,11 +5,15 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_test.*
 import ru.pyurkin.pddtest.R
 
 class TestsFragment : Fragment(R.layout.fragment_test) {
+
+    private lateinit var testsViewModel: TestsViewModel
 
     companion object {
         val AUTH_TOKEN = "authToken"
@@ -28,12 +32,14 @@ class TestsFragment : Fragment(R.layout.fragment_test) {
         test_list.adapter = testsAdapter;
         test_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val model = ArrayList<TestsAdapter.Model>()
-        for (i in 0..20) {
-            model.add(TestsAdapter.TestModel("simple name${i}", false, R.mipmap.ic_launcher))
-        }
-        model.set(4, TestsAdapter.BannerModel(R.mipmap.ic_launcher))
-        model.set(7, TestsAdapter.BannerModel(R.mipmap.img_logo))
-        testsAdapter.setModel(model)
+        configureViewModel()
     }
+
+    private fun configureViewModel() {
+        testsViewModel = ViewModelProviders.of(this).get(TestsViewModel::class.java)
+        testsViewModel.items.observe(viewLifecycleOwner, Observer {data ->
+            testsAdapter.setModel(data)
+        })
+    }
+
 }

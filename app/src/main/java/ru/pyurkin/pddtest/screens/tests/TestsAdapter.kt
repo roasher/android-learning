@@ -17,16 +17,17 @@ interface OnCheckBoxClick {
 
 class TestsAdapter(private val onCheckBoxClick: OnCheckBoxClick?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    abstract class Model {
+    abstract class Model() {
+        abstract var icon: Int
         abstract fun getItemViewType(): Int
     }
-    data class TestModel(val name: String, var isChecked: Boolean, val icon: Int) : Model() {
+    data class TestModel(val name: String, var isChecked: Boolean, override var icon: Int) : Model() {
         override fun getItemViewType(): Int {
             return 0
         }
     }
 
-    data class BannerModel(val icon: Int) : Model() {
+    data class BannerModel(override var icon: Int) : Model() {
         override fun getItemViewType(): Int {
             return 1
         }
