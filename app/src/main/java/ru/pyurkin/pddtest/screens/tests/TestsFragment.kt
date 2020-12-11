@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_test.*
 import ru.pyurkin.pddtest.R
+import ru.pyurkin.pddtest.screens.PddTestApplication
 
 class TestsFragment : Fragment(R.layout.fragment_test) {
 
@@ -33,12 +34,18 @@ class TestsFragment : Fragment(R.layout.fragment_test) {
         test_list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         configureViewModel()
+        testsViewModel.generateData((activity?.application as? PddTestApplication)?.productsApi)
     }
 
     private fun configureViewModel() {
         testsViewModel = ViewModelProviders.of(this).get(TestsViewModel::class.java)
         testsViewModel.items.observe(viewLifecycleOwner, Observer {data ->
             testsAdapter.setModel(data)
+        })
+        testsViewModel.errors.observe(viewLifecycleOwner, Observer {error ->
+            if (error.isNotBlank()) {
+                Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+            }
         })
     }
 
