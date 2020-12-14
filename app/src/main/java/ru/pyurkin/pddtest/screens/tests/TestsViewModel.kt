@@ -9,9 +9,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import ru.pyurkin.pddtest.R
-import ru.pyurkin.pddtest.data.products.ProductsApi
+import ru.pyurkin.pddtest.data.products.ProductRepository
+import javax.inject.Inject
 
-class TestsViewModel : ViewModel() {
+class TestsViewModel @Inject constructor(
+    private val productRepository: ProductRepository
+) : ViewModel() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -25,21 +28,27 @@ class TestsViewModel : ViewModel() {
         super.onCleared()
     }
 
-    fun generateData(productsApi: ProductsApi?) {
-        productsApi?.let {
-            compositeDisposable.addAll(it.get()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({products ->
-                        val model = ArrayList<TestsAdapter.Model>()
-                        for (product in products) {
-                            model.add(TestsAdapter.TestModel(product.title, false, R.mipmap.ic_launcher))
-                            _items.postValue(model)
-                        }
-                    }, {
-                        errors.postValue(it.toString())
-                    }));
-        }
+    fun generateData() {
+        compositeDisposable.addAll(
+            productRepository.fetchProducts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ products ->
+                    val model = ArrayList<TestsAdapter.Model>()
+                    for (product in products) {
+                        model.add(
+                            TestsAdapter.TestModel(
+                                product.title,
+                                false,
+                                R.mipmap.ic_launcher
+                            )
+                        )
+                        _items.postValue(model)
+                    }
+                }, {
+                    errors.postValue(it.toString())
+                })
+        );
 
         Handler().postDelayed({
             Log.i(this.javaClass.toString(), "data changed!!!")

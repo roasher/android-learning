@@ -1,37 +1,34 @@
 package ru.pyurkin.pddtest.screens
 
 import android.app.Application
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.pyurkin.pddtest.data.products.ProductsApi
+import ru.pyurkin.pddtest.di.AppComponent
+import javax.inject.Inject
 
 class PddTestApplication : Application() {
+//    @Inject
+//    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+//
+//    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
-    lateinit var productsApi: ProductsApi
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
-        setUpRetrofit()
-    }
+//        setUpRetrofit()
 
-    private fun setUpRetrofit() {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        appComponent = DaggerAppComponent
+            .builder()
+            .build()
+//        appComponent.inject(this)
 
-        val okHttpClient = OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor)
-                .build()
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl(ProductsApi.baseUrl)
-                .client(okHttpClient)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-        productsApi = retrofit.create(ProductsApi::class.java)
     }
 }
